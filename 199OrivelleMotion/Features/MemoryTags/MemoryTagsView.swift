@@ -57,7 +57,10 @@ struct MemoryTagsView: View {
                         .ignoresSafeArea(edges: .bottom)
                 }
             }
-            .sheet(isPresented: $viewModel.showAddSheet) {
+            .sheet(isPresented: $viewModel.showAddSheet, onDismiss: {
+                viewModel.editingEntry = nil
+                viewModel.selectedTemplate = nil
+            }) {
                 AddMemoryView(viewModel: viewModel, store: store)
             }
             .sheet(isPresented: $viewModel.showTemplateSheet) {
@@ -229,13 +232,21 @@ struct AddMemoryView: View {
     @ObservedObject var store: AppStorage
     @Environment(\.dismiss) private var dismiss
 
+    @FocusState private var focusedField: Field?
+
     @State private var title = ""
     @State private var notes = ""
     @State private var selectedEmoji = "📸"
     @State private var selectedTag = "General"
     @State private var selectedAlbumID: UUID?
     @State private var showValidationError = false
+    @State private var showValidationAlert = false
     @State private var shakeTrigger: CGFloat = 0
+
+    private enum Field: Hashable {
+        case title
+        case notes
+    }
 
     private let tags = ["General", "Travel", "Family", "Nature", "Events"]
 
@@ -243,78 +254,109 @@ struct AddMemoryView: View {
         NavigationStack {
             ZStack {
                 AppBackgroundView()
-                Form {
-                    Section {
-                        TextField("Title", text: $title)
-                            .modifier(ShakeEffect(animatableData: shakeTrigger))
-                        if showValidationError {
-                            Text("Please enter a title.")
-                                .font(.caption)
-                                .foregroundStyle(Color("AppPrimary"))
-                        }
-                    }
-                    .appListRowBackground()
+                ScrollViewReader { proxy in
+                    Form {
+                        Section {
+                            TextField("Title", text: $title)
+                                .focused($focusedField, equals: .title)
+                                .textInputAutocapitalization(.sentences)
+                                .submitLabel(.next)
+                                .onSubmit { focusedField = .notes }
+                                .modifier(ShakeEffect(animatableData: shakeTrigger))
+                                .id(Field.title)
 
-                    Section("Emoji") {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 12) {
-                            ForEach(viewModel.emojiOptions, id: \.self) { emoji in
-                                Button {
-                                    HapticManager.lightTap()
-                                    selectedEmoji = emoji
-                                } label: {
-                                    Text(emoji)
-                                        .font(.title)
-                                        .frame(width: 44, height: 44)
-                                        .background(Circle().fill(selectedEmoji == emoji ? Color("AppPrimary") : Color("AppBackground")))
-                                }
-                                .buttonStyle(.plain)
+                            TextField("Notes", text: $notes, axis: .vertical)
+                                .focused($focusedField, equals: .notes)
+                                .lineLimit(3...6)
+                                .id(Field.notes)
+
+                            if showValidationError {
+                                Text("Add a title or notes to save this memory.")
+                                    .font(.caption)
+                                    .foregroundStyle(Color("AppPrimary"))
                             }
+                        } footer: {
+                            Text("If the title is empty, your notes will be used as the memory title.")
                         }
-                    }
-                    .appListRowBackground()
+                        .appListRowBackground()
 
-                    Section("Tag") {
-                        Picker("Tag", selection: $selectedTag) {
-                            ForEach(tags, id: \.self) { Text($0).tag($0) }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .appListRowBackground()
-
-                    if !store.albums.isEmpty {
-                        Section("Album") {
-                            Picker("Album", selection: $selectedAlbumID) {
-                                Text("None").tag(UUID?.none)
-                                ForEach(store.albums) { album in
-                                    Text("\(album.emoji) \(album.name)").tag(Optional(album.id))
+                        Section("Emoji") {
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 12) {
+                                ForEach(viewModel.emojiOptions, id: \.self) { emoji in
+                                    Button {
+                                        HapticManager.lightTap()
+                                        selectedEmoji = emoji
+                                    } label: {
+                                        Text(emoji)
+                                            .font(.title)
+                                            .frame(width: 44, height: 44)
+                                            .background(Circle().fill(selectedEmoji == emoji ? Color("AppPrimary") : Color("AppBackground")))
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
                         }
                         .appListRowBackground()
-                    }
 
-                    Section("Notes") {
-                        TextField("Add notes...", text: $notes, axis: .vertical)
-                            .lineLimit(3...6)
+                        Section("Tag") {
+                            Picker("Tag", selection: $selectedTag) {
+                                ForEach(tags, id: \.self) { Text($0).tag($0) }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                        .appListRowBackground()
+
+                        if !store.albums.isEmpty {
+                            Section("Album") {
+                                Picker("Album", selection: $selectedAlbumID) {
+                                    Text("None").tag(UUID?.none)
+                                    ForEach(store.albums) { album in
+                                        Text("\(album.emoji) \(album.name)").tag(Optional(album.id))
+                                    }
+                                }
+                            }
+                            .appListRowBackground()
+                        }
                     }
-                    .appListRowBackground()
+                    .scrollContentBackground(.hidden)
+                    .scrollDismissesKeyboard(.interactively)
+                    .onChange(of: showValidationError) { hasError in
+                        guard hasError else { return }
+                        withAnimation {
+                            proxy.scrollTo(Field.title, anchor: .top)
+                        }
+                    }
                 }
-                .scrollContentBackground(.hidden)
             }
             .navigationTitle(viewModel.editingEntry == nil ? "Add Memory" : "Edit Memory")
             .navigationBarTitleDisplayMode(.inline)
             .appNavigationChrome()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { HapticManager.lightTap(); dismiss() }
+                    Button("Cancel") {
+                        HapticManager.lightTap()
+                        viewModel.showAddSheet = false
+                        dismiss()
+                    }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { save() }
-                        .foregroundStyle(Color("AppAccent"))
+                        .foregroundStyle(canSave ? Color("AppAccent") : Color("AppTextSecondary"))
                 }
+            }
+            .alert("Can't Save Memory", isPresented: $showValidationAlert) {
+                Button("OK", role: .cancel) {
+                    focusedField = .title
+                }
+            } message: {
+                Text("Please enter a title or notes before saving.")
             }
             .onAppear { populateFields() }
         }
+    }
+
+    private var canSave: Bool {
+        !viewModel.resolvedTitle(title: title, notes: notes).isEmpty
     }
 
     private func populateFields() {
@@ -333,6 +375,8 @@ struct AddMemoryView: View {
     }
 
     private func save() {
+        HapticManager.lightTap()
+
         let success = viewModel.saveEntry(
             title: title,
             emoji: selectedEmoji,
@@ -341,11 +385,17 @@ struct AddMemoryView: View {
             albumID: selectedAlbumID,
             existingID: viewModel.editingEntry?.id
         )
-        if success { dismiss() }
-        else {
-            HapticManager.warning()
-            showValidationError = true
-            withAnimation { shakeTrigger += 1 }
+
+        if success {
+            viewModel.showAddSheet = false
+            dismiss()
+            return
         }
+
+        HapticManager.warning()
+        showValidationError = true
+        showValidationAlert = true
+        focusedField = .title
+        withAnimation { shakeTrigger += 1 }
     }
 }

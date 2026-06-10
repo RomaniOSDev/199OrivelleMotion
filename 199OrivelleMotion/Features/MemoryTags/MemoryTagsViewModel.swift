@@ -59,14 +59,16 @@ final class MemoryTagsViewModel: ObservableObject {
         albumID: UUID?,
         existingID: UUID?
     ) -> Bool {
-        let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedTitle = resolvedTitle(title: title, notes: notes)
         guard !trimmedTitle.isEmpty else { return false }
+
+        let trimmedNotes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if let existingID, let index = store.memoryEntries.firstIndex(where: { $0.id == existingID }) {
             var updated = store.memoryEntries[index]
             updated.title = trimmedTitle
             updated.emoji = emoji
-            updated.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+            updated.notes = trimmedNotes
             updated.tag = tag
             updated.albumID = albumID
             store.updateMemoryEntry(updated)
@@ -75,7 +77,7 @@ final class MemoryTagsViewModel: ObservableObject {
             let entry = MemoryEntry(
                 title: trimmedTitle,
                 emoji: emoji,
-                notes: notes.trimmingCharacters(in: .whitespacesAndNewlines),
+                notes: trimmedNotes,
                 tag: tag,
                 albumID: albumID
             )
@@ -85,7 +87,20 @@ final class MemoryTagsViewModel: ObservableObject {
             triggerSuccess(for: entry.id)
         }
         selectedTemplate = nil
+        editingEntry = nil
         return true
+    }
+
+    /// Uses notes as title when title is empty — matches common add-memory flow on iPad.
+    func resolvedTitle(title: String, notes: String) -> String {
+        let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedTitle.isEmpty { return trimmedTitle }
+
+        let trimmedNotes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedNotes.isEmpty else { return "" }
+
+        if trimmedNotes.count <= 80 { return trimmedNotes }
+        return String(trimmedNotes.prefix(80))
     }
 
     func deleteEntry(_ entry: MemoryEntry) {

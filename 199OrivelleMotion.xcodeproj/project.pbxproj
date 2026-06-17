@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300E53322FE296D800328220 /* WebDocumentSurfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53302FE296D800328220 /* WebDocumentSurfaceView.swift */; };
+		300E53332FE296D800328220 /* LaunchSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532B2FE296D800328220 /* LaunchSessionStore.swift */; };
+		300E53342FE296D800328220 /* LaunchFlowResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53292FE296D800328220 /* LaunchFlowResolver.swift */; };
+		300E53352FE296D800328220 /* LaunchFlowDebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53272FE296D800328220 /* LaunchFlowDebugOptions.swift */; };
+		300E53362FE296D800328220 /* LaunchFlowSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532A2FE296D800328220 /* LaunchFlowSecrets.swift */; };
+		300E53372FE296D800328220 /* LaunchDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53262FE296D800328220 /* LaunchDestination.swift */; };
+		300E53382FE296D800328220 /* DeferredLaunchCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53252FE296D800328220 /* DeferredLaunchCanvas.swift */; };
+		300E53392FE296D800328220 /* RemoteEntryProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532D2FE296D800328220 /* RemoteEntryProbe.swift */; };
+		300E533A2FE296D800328220 /* LaunchFlowLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53282FE296D800328220 /* LaunchFlowLogger.swift */; };
+		300E533B2FE296D800328220 /* RemoteEntryURLComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532E2FE296D800328220 /* RemoteEntryURLComposer.swift */; };
+		300E533C2FE296D800328220 /* CalendarGateEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E53242FE296D800328220 /* CalendarGateEvaluator.swift */; };
+		300E533D2FE296D800328220 /* RootWindowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532F2FE296D800328220 /* RootWindowPresenter.swift */; };
+		300E533E2FE296D800328220 /* LaunchStagingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E532C2FE296D800328220 /* LaunchStagingState.swift */; };
+		300E53402FE296DD00328220 /* AppMarketingCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E533F2FE296DD00328220 /* AppMarketingCopy.swift */; };
 		30BE55672FCDEE2400ED4307 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BE555C2FCDEE2400ED4307 /* Assets.xcassets */; };
 		30BE55692FCDEE2400ED4307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BE55602FCDEE2400ED4307 /* LaunchScreen.storyboard */; };
 		30BE556A2FCDEE2400ED4307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BE55622FCDEE2400ED4307 /* Main.storyboard */; };
@@ -69,6 +83,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		300E53242FE296D800328220 /* CalendarGateEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGateEvaluator.swift; sourceTree = "<group>"; };
+		300E53252FE296D800328220 /* DeferredLaunchCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredLaunchCanvas.swift; sourceTree = "<group>"; };
+		300E53262FE296D800328220 /* LaunchDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDestination.swift; sourceTree = "<group>"; };
+		300E53272FE296D800328220 /* LaunchFlowDebugOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFlowDebugOptions.swift; sourceTree = "<group>"; };
+		300E53282FE296D800328220 /* LaunchFlowLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFlowLogger.swift; sourceTree = "<group>"; };
+		300E53292FE296D800328220 /* LaunchFlowResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFlowResolver.swift; sourceTree = "<group>"; };
+		300E532A2FE296D800328220 /* LaunchFlowSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchFlowSecrets.swift; sourceTree = "<group>"; };
+		300E532B2FE296D800328220 /* LaunchSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSessionStore.swift; sourceTree = "<group>"; };
+		300E532C2FE296D800328220 /* LaunchStagingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchStagingState.swift; sourceTree = "<group>"; };
+		300E532D2FE296D800328220 /* RemoteEntryProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteEntryProbe.swift; sourceTree = "<group>"; };
+		300E532E2FE296D800328220 /* RemoteEntryURLComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteEntryURLComposer.swift; sourceTree = "<group>"; };
+		300E532F2FE296D800328220 /* RootWindowPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowPresenter.swift; sourceTree = "<group>"; };
+		300E53302FE296D800328220 /* WebDocumentSurfaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDocumentSurfaceView.swift; sourceTree = "<group>"; };
+		300E533F2FE296DD00328220 /* AppMarketingCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMarketingCopy.swift; sourceTree = "<group>"; };
 		30BE53822FCCEC5C00ED4307 /* 199OrivelleMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 199OrivelleMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BE55162FCDEE2400ED4307 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		30BE55172FCDEE2400ED4307 /* ActivityRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRecord.swift; sourceTree = "<group>"; };
@@ -146,6 +174,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300E53312FE296D800328220 /* LaunchFlow */ = {
+			isa = PBXGroup;
+			children = (
+				300E53242FE296D800328220 /* CalendarGateEvaluator.swift */,
+				300E53252FE296D800328220 /* DeferredLaunchCanvas.swift */,
+				300E53262FE296D800328220 /* LaunchDestination.swift */,
+				300E53272FE296D800328220 /* LaunchFlowDebugOptions.swift */,
+				300E53282FE296D800328220 /* LaunchFlowLogger.swift */,
+				300E53292FE296D800328220 /* LaunchFlowResolver.swift */,
+				300E532A2FE296D800328220 /* LaunchFlowSecrets.swift */,
+				300E532B2FE296D800328220 /* LaunchSessionStore.swift */,
+				300E532C2FE296D800328220 /* LaunchStagingState.swift */,
+				300E532D2FE296D800328220 /* RemoteEntryProbe.swift */,
+				300E532E2FE296D800328220 /* RemoteEntryURLComposer.swift */,
+				300E532F2FE296D800328220 /* RootWindowPresenter.swift */,
+				300E53302FE296D800328220 /* WebDocumentSurfaceView.swift */,
+			);
+			path = LaunchFlow;
+			sourceTree = "<group>";
+		};
 		30BE53792FCCEC5C00ED4307 = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +391,7 @@
 				30BE55522FCDEE2400ED4307 /* MemoryTags */,
 				30BE55542FCDEE2400ED4307 /* Onboarding */,
 				30BE55572FCDEE2400ED4307 /* Settings */,
+				300E533F2FE296DD00328220 /* AppMarketingCopy.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -371,6 +420,7 @@
 				30BE55632FCDEE2400ED4307 /* privacy_policy.md */,
 				30BE55642FCDEE2400ED4307 /* SceneDelegate.swift */,
 				30BE55652FCDEE2400ED4307 /* ViewController.swift */,
+				300E53312FE296D800328220 /* LaunchFlow */,
 			);
 			path = 199OrivelleMotion;
 			sourceTree = "<group>";
@@ -495,6 +545,7 @@
 				30BE556E2FCDEE2400ED4307 /* Album.swift in Sources */,
 				30BE556F2FCDEE2400ED4307 /* Caption.swift in Sources */,
 				30BE55702FCDEE2400ED4307 /* CustomCollection.swift in Sources */,
+				300E53402FE296DD00328220 /* AppMarketingCopy.swift in Sources */,
 				30BE55712FCDEE2400ED4307 /* EntryTemplate.swift in Sources */,
 				30BE55722FCDEE2400ED4307 /* ExportBundle.swift in Sources */,
 				30BE55732FCDEE2400ED4307 /* MemoryEntry.swift in Sources */,
@@ -507,6 +558,19 @@
 				30BE557A2FCDEE2400ED4307 /* AppExternalLink.swift in Sources */,
 				30BE557B2FCDEE2400ED4307 /* HapticManager.swift in Sources */,
 				30BE557C2FCDEE2400ED4307 /* ShakeEffect.swift in Sources */,
+				300E53322FE296D800328220 /* WebDocumentSurfaceView.swift in Sources */,
+				300E53332FE296D800328220 /* LaunchSessionStore.swift in Sources */,
+				300E53342FE296D800328220 /* LaunchFlowResolver.swift in Sources */,
+				300E53352FE296D800328220 /* LaunchFlowDebugOptions.swift in Sources */,
+				300E53362FE296D800328220 /* LaunchFlowSecrets.swift in Sources */,
+				300E53372FE296D800328220 /* LaunchDestination.swift in Sources */,
+				300E53382FE296D800328220 /* DeferredLaunchCanvas.swift in Sources */,
+				300E53392FE296D800328220 /* RemoteEntryProbe.swift in Sources */,
+				300E533A2FE296D800328220 /* LaunchFlowLogger.swift in Sources */,
+				300E533B2FE296D800328220 /* RemoteEntryURLComposer.swift in Sources */,
+				300E533C2FE296D800328220 /* CalendarGateEvaluator.swift in Sources */,
+				300E533D2FE296D800328220 /* RootWindowPresenter.swift in Sources */,
+				300E533E2FE296D800328220 /* LaunchStagingState.swift in Sources */,
 				30BE557D2FCDEE2400ED4307 /* SoundManager.swift in Sources */,
 				30BE557E2FCDEE2400ED4307 /* AchievementBanner.swift in Sources */,
 				30BE557F2FCDEE2400ED4307 /* AppBackgroundView.swift in Sources */,
@@ -577,7 +641,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 199OrivelleMotion/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orivelle Motion";
@@ -594,7 +658,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hor.0r1v3ll3m0t10n;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -618,7 +682,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 199OrivelleMotion/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Orivelle Motion";
@@ -635,7 +699,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hor.0r1v3ll3m0t10n;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
